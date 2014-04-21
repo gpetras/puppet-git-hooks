@@ -22,6 +22,9 @@ changedmodules=$(echo -e "$tmpchangedmodules" | sort -u)
 for module_dir in $changedmodules; do
     echo -e "\e[0;36mRunning rspec-puppet tests for module $1...\e[0m"
     cd $module_dir
+    if [ ! -d "rspec" ]; then
+      continue
+    fi
     #this will run rspec for every test in the module
     rspec > $error_msg
     RC=$?
